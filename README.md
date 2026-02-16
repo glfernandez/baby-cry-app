@@ -39,14 +39,5 @@ This separation is meant to reduce false alerts in noisy environments.
 ## Quickstart
 See `docs/QUICKSTART.md` for setup and command examples.
 
-## Security and Privacy
-This public repository is sanitized:
-- no API keys/tokens committed,
-- no raw family audio or private datasets committed,
-- no local absolute machine paths intentionally tracked,
-- `.gitignore` blocks sensitive and generated artifacts.
-
-Before every public push, follow `docs/SECURITY_CHECKLIST.md`.
-
 ## Disclaimer
 This is a technical prototype and not a medical device.
