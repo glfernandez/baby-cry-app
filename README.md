@@ -1,59 +1,62 @@
 # Baby Cry App
 
-A public proof-of-concept for infant distress detection using an agentic audio pipeline.
+Agentic audio prototype for infant distress signal classification, built as a privacy-first engineering project.
 
-## What This Project Does
-The system processes short audio windows and predicts likely cry intent classes.
+## Project Scope
+- Detect and classify short cry segments into likely intent labels.
+- Run an explicit multi-stage decision flow (detector -> classifier -> validator).
+- Support model training/export workflows and Android app integration for on-device testing.
 
-Current class map:
-- hungry
-- needs_burping
-- belly_pain
-- discomfort
-- tired
-- lonely
-- cold_hot
-- scared
-- dirty_diaper
+## Label Set
+- `hungry`
+- `needs_burping`
+- `belly_pain`
+- `discomfort`
+- `tired`
+- `lonely`
+- `cold_hot`
+- `scared`
+- `dirty_diaper`
 
-## Agentic Pipeline (Practical)
-The implementation is structured as three decision stages:
-- Detector stage: selects candidate audio segments.
-- Classifier stage: runs feature extraction + model inference.
-- Validator stage: checks confidence/top-k behavior before result usage.
+## Agentic Decision Flow
+1. `Detector`: selects candidate audio windows.
+2. `Classifier`: extracts features and predicts class probabilities.
+3. `Validator`: applies confidence/top-k checks before surfacing final output.
 
-This separation is meant to reduce false alerts in noisy environments.
+This architecture is designed to reduce false positives in non-stationary home audio.
 
 ## Repository Structure
-- `scripts/`: feature extraction, dataset generation, training, export, inference.
-- `android/`: Android app source for on-device testing and inference.
-- `docs/`: quickstart and public security checklist.
+- `scripts/`: dataset generation, training, inference, scaler/model export.
+- `android/`: Android app module for mobile testing.
+- `docs/QUICKSTART.md`: local setup and command examples.
+- `docs/SECURITY_CHECKLIST.md`: pre-push public-safety checklist.
 - `.env.example`: environment variable template.
 
-## Key Scripts
-- `scripts/generate_feature_dataset.py`: builds summary-feature CSV from labeled WAV files.
-- `scripts/train_features.py`: trains the dense classifier and saves artifacts.
-- `scripts/run_inference_features.py`: runs inference on WAV or feature CSV input.
-- `scripts/export_tflite.py`: exports trained model to TFLite.
-- `scripts/fit_feature_scaler.py`, `scripts/prepare_scaler.py`, `scripts/export_scaler.py`: scaler workflows.
-
 ## Quickstart
-See `docs/QUICKSTART.md` for setup and command examples.
+Use the full guide:
+- `docs/QUICKSTART.md`
 
-## Android App (Try It Locally)
-1. Open `android/` in Android Studio.
-2. Let Gradle sync the project.
-3. Run on an emulator or physical device (API 26+).
+Core training/inference path:
+```bash
+python scripts/generate_feature_dataset.py --dataset-root /path/to/wavs --output /path/to/features.csv --augment
+python scripts/train_features.py --dataset /path/to/features.csv --output-dir /path/to/model_out --epochs 80
+python scripts/run_inference_features.py --model /path/to/model_out/feature_model.keras --scaler /path/to/model_out/feature_scaler.pkl /path/to/test_audio.wav
+```
 
-CLI option:
+## Android Build
 ```bash
 cd android
 ./gradlew assembleDebug
 ```
+
+## Public Security Posture
+- No raw family audio or private datasets are committed.
+- No hardcoded API credentials should be committed.
+- `.gitignore` blocks local artifacts and sensitive runtime files.
 
 ## Preview
 ![Preview 1](docs/images/preview-01.jpeg)
 ![Preview 2](docs/images/preview-02.jpeg)
 
 ## Disclaimer
-This is a technical prototype and not a medical device.
+This is a technical prototype for engineering demonstration. It is not a medical device.
