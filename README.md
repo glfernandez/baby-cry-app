@@ -1,47 +1,52 @@
-# agentic-audio-monitor (Infant Distress Detection)
+# Baby Cry App
 
-AI-native audio monitoring backend for infant distress detection and cry-category inference.
+A public proof-of-concept for infant distress detection using an agentic audio pipeline.
 
-## Specification
-Build a privacy-conscious, near-real-time system that:
-- captures short local audio windows,
-- extracts robust acoustic features,
-- runs on-device/edge inference,
-- returns ranked cry categories with confidence,
-- supports downstream automation and alerting.
+## What This Project Does
+The system processes short audio windows and predicts likely cry intent classes.
 
-The core target is robust operation under noisy home environments with minimal latency.
+Current class map:
+- hungry
+- needs_burping
+- belly_pain
+- discomfort
+- tired
+- lonely
+- cold_hot
+- scared
+- dirty_diaper
 
-## Agentic Layer
-The system is designed as an agentic pipeline rather than a single classifier call.
+## Agentic Pipeline (Practical)
+The implementation is structured as three decision stages:
+- Detector stage: selects candidate audio segments.
+- Classifier stage: runs feature extraction + model inference.
+- Validator stage: checks confidence/top-k behavior before result usage.
 
-- Detector Agent: identifies candidate cry segments from continuous audio.
-- Classifier Agent: predicts likely distress classes from extracted features.
-- Validator Agent: rejects low-confidence or ambient-noise false positives and applies simple policy checks before surfacing a result.
+This separation is meant to reduce false alerts in noisy environments.
 
-This architecture improves reliability by separating signal detection, classification, and decision validation.
+## Repository Structure
+- `scripts/`: feature extraction, dataset generation, training, export, inference.
+- `docs/`: quickstart and public security checklist.
+- `.env.example`: environment variable template.
 
-## Technical Stack
-- Python
-- Librosa / NumPy for audio feature extraction
-- TensorFlow/Keras model export and inference tooling
-- Android integration scaffolding for mobile capture/inference workflows
+## Key Scripts
+- `scripts/generate_feature_dataset.py`: builds summary-feature CSV from labeled WAV files.
+- `scripts/train_features.py`: trains the dense classifier and saves artifacts.
+- `scripts/run_inference_features.py`: runs inference on WAV or feature CSV input.
+- `scripts/export_tflite.py`: exports trained model to TFLite.
+- `scripts/fit_feature_scaler.py`, `scripts/prepare_scaler.py`, `scripts/export_scaler.py`: scaler workflows.
 
-## Repository Layout
-- `scripts/`: feature extraction, training, scaling, export, and inference scripts
-- `android/`: app integration and deployment scaffolding
-- `docs/`: implementation notes and planning docs
+## Quickstart
+See `docs/QUICKSTART.md` for setup and command examples.
 
 ## Security and Privacy
-This public repository is sanitized for open sharing.
+This public repository is sanitized:
+- no API keys/tokens committed,
+- no raw family audio or private datasets committed,
+- no local absolute machine paths intentionally tracked,
+- `.gitignore` blocks sensitive and generated artifacts.
 
-- No API keys or tokens are stored in source.
-- Environment variables are documented in `.env.example`.
-- Raw audio, generated datasets, local machine paths, and model artifacts are excluded via `.gitignore`.
-
-## Development Notes
-- This project follows specification-driven development for rapid prototyping in a sensitive-data context.
-- For production use, add formal evaluation datasets, calibrated thresholds, and monitoring/rollback controls.
+Before every public push, follow `docs/SECURITY_CHECKLIST.md`.
 
 ## Disclaimer
-This is a technical proof-of-concept and not a medical device.
+This is a technical prototype and not a medical device.
