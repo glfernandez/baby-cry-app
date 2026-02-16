@@ -39,5 +39,9 @@ This separation is meant to reduce false alerts in noisy environments.
 ## Quickstart
 See `docs/QUICKSTART.md` for setup and command examples.
 
+## Preview
+![Preview 1](docs/images/preview-01.jpeg)
+![Preview 2](docs/images/preview-02.jpeg)
+
 ## Disclaimer
 This is a technical prototype and not a medical device.
