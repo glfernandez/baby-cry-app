@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Pixel Cry Analyzer</string>
+    <string name="permission_record_audio_reason">Pixel Cry Analyzer needs the microphone to listen for your baby cry and analyze it locally.</string>
+    <string name="permission_denied">Microphone permission denied. Enable it in Settings to analyze cries.</string>
+    <string name="action_listen">Listen</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_retry">New recording</string>
+    <string name="status_listening">Listening…</string>
+    <string name="status_processing">Analyzing…</string>
+    <string name="status_ready">Tap to listen</string>
+    <string name="dialog_permission_title">Microphone required</string>
+    <string name="dialog_permission_message">Allow microphone access so the app can capture and classify baby cries locally.</string>
+    <string name="dialog_permission_positive">Allow</string>
+    <string name="dialog_permission_negative">Not now</string>
+    <string name="sample_picker_title">Choose sample</string>
+    <string name="sample_picker_cta">Play sample</string>
+    <string name="sample_picker_label">Pick a cry clip to analyze directly.</string>
+    <string name="sample_picker_none">No sample selected</string>
+    <string name="sample_picker_analyze">Analyze sample</string>
+    <string name="sample_picker_clear">Clear selection</string>
+    <string name="sample_picker_import">Import recording</string>
+</resources>

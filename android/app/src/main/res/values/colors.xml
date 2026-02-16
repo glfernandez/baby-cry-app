@@ -1,0 +1,10 @@
+<resources>
+    <color name="brand_primary">#365BEE</color>
+    <color name="brand_on_primary">#FFFFFF</color>
+    <color name="brand_secondary">#4B8DF7</color>
+    <color name="brand_background">#0B101A</color>
+    <color name="brand_surface">#121826</color>
+    <color name="brand_surface_variant">#1D2535</color>
+    <color name="brand_outline">#31405C</color>
+</resources>
+

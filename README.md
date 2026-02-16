@@ -26,6 +26,7 @@ This separation is meant to reduce false alerts in noisy environments.
 
 ## Repository Structure
 - `scripts/`: feature extraction, dataset generation, training, export, inference.
+- `android/`: Android app source for on-device testing and inference.
 - `docs/`: quickstart and public security checklist.
 - `.env.example`: environment variable template.
 
@@ -38,6 +39,17 @@ This separation is meant to reduce false alerts in noisy environments.
 
 ## Quickstart
 See `docs/QUICKSTART.md` for setup and command examples.
+
+## Android App (Try It Locally)
+1. Open `android/` in Android Studio.
+2. Let Gradle sync the project.
+3. Run on an emulator or physical device (API 26+).
+
+CLI option:
+```bash
+cd android
+./gradlew assembleDebug
+```
 
 ## Preview
 ![Preview 1](docs/images/preview-01.jpeg)

@@ -21,6 +21,7 @@ models/**
 *.flac
 *.aac
 *.ogg
+!android/app/src/main/res/raw/cry_*.wav
 Data/**
 *.csv
 *.zip
